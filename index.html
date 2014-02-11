@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Info loader</title>
+    <meta charset="utf-8">
+    <link href="ajax-homework.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <input list="loadusers" type="text" tabindex="1" placeholder="Введите имя пользователя..." id="user-name" autocomplete="on" spellcheck="false" name="user-name" autofocus>
+        <datalist id="loadusers">
+        </datalist>
+
+        <a class="button" href="#">Загрузить</a>
+    </div>
+</div>
+<div class="container">
+    <div id="user">
+        <div class="info"></div>
+        <div class="repos"></div>
+    </div>
+</div>
+
+<script src="ajax-homework.js"></script>
+</body>
+</html>
