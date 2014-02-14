@@ -28,6 +28,9 @@ function repoInfoListener(e, repos){
             "repos": this.responseText
         };
         localStorage[cache.user]= JSON.stringify(cache);
+        var name = document.createElement("option");
+        name.setAttribute("value",cache.user);
+        document.getElementById("loadusers").appendChild(name);
     }
 }
 
@@ -62,7 +65,7 @@ function userInfoListener (e, info) {
 function loadData(user,listener){
     var oReq = new XMLHttpRequest();
     oReq.onload = listener;
-    oReq.open("get", "https://api.github.com/users/"+user, true);
+    oReq.open("get", "https://api.github.com/users/"+user);
     oReq.send();
 }
 
@@ -96,9 +99,15 @@ document.querySelector("#user-name").addEventListener("keypress",function(e){
     }
 },false);
 (function helper(){
-    var helper="";
+    var names="";
     for (var i =0;i<localStorage.length;i++){
-        helper+='<option value="'+localStorage.key(i)+'"/>';
+        if (isUserCached(localStorage.key(i))){
+            names+='<option value="'+localStorage.key(i)+'"/>';
+        }
+        else{
+            localStorage.removeItem(localStorage.key(i));
+            i--;
+        }
     }
-    document.getElementById("loadusers").innerHTML=helper;
+    document.getElementById("loadusers").innerHTML=names;
 })();
